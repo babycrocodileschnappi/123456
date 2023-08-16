@@ -9,7 +9,6 @@ const AppRouter: React.FC = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/pokemon/:id" element={<DetailPage />} />
-        {/* Add a catch-all route in case of unknown routes */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

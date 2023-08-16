@@ -1,77 +1,70 @@
+//修改后宝可梦列表列数根据浏览器页面宽度更改
+//之前为每个宝可梦发起了一个独立的API请求，这可能导致请求频繁，从而降低加载性能，修改后使用一个批量请求来获取多个宝可梦的数据，从而减少网络请求次数
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination';
-import { fetchPokemonById } from './api';
+import { fetchPokemonByIds } from './api';
 import '../tailwind.css';
+import {getPokemonBackgroundColor } from '../components/pokemonUtils';
 
 const PokemonGrid: React.FC = () => {
   const [pokemonList, setPokemonList] = useState<any[]>([]);
-  const itemsPerPage = 45; // 5 rows * 9 columns
+  const itemsPerPage = 45; 
+  const minPokemonPerRow = 3;
+  const maxPokemonPerRow = 9;
   const [currentPage, setCurrentPage] = useState(1);
+  const [pokemonPerRow, setPokemonPerRow] = useState(maxPokemonPerRow);
 
   useEffect(() => {
     const fetchPokemonPage = async () => {
-      const list = [];
       const startIndex = (currentPage - 1) * itemsPerPage + 1;
       const endIndex = startIndex + itemsPerPage - 1;
-
+      const pokemonIds = [];
+      
       for (let i = startIndex; i <= endIndex && i <= 898; i++) {
-        const data = await fetchPokemonById(i);
-        list.push(data);
+        pokemonIds.push(i);
       }
-
-      setPokemonList(list);
+      try {
+        const batchData = await fetchPokemonByIds(pokemonIds);
+        setPokemonList(batchData);
+      } catch (error) {
+        console.log('Error fetching Pokemon:', error);
+      }
     };
 
     fetchPokemonPage();
   }, [currentPage]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      const availableColumns = Math.floor(windowWidth / 150); // Adjust the value based on your design
+      const adjustedColumns = Math.max(minPokemonPerRow, Math.min(maxPokemonPerRow, availableColumns));
+      setPokemonPerRow(adjustedColumns);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const typeColors: { [key: string]: string } = {
-    fire: 'bg-red-300',
-    grass: 'bg-green-300',
-    electric: 'bg-yellow-300',
-    water: 'bg-blue-300',
-    ground: 'bg-yellow-200',
-    rock: 'bg-yellow-200',
-    fairy: 'bg-purple-200',
-    poison: 'bg-purple-300',
-    bug: 'bg-green-400',
-    dragon: 'bg-indigo-300',
-    psychic: 'bg-pink-200',
-    flying: 'bg-blue-200',
-    fighting: 'bg-red-200',
-    normal: 'bg-gray-200',
-    ghost: 'bg-indigo-300',
-    steel: 'bg-gray-300',
-    ice: 'bg-blue-100',
-    dark: 'bg-brown-300',
-  };
-
-  const getPokemonBackgroundColor = (type: string) => {
-    console.log('Type:', type);
-    if (type && type.length > 0) {
-      const color = typeColors[type];
-      console.log('Color:', color);
-
-      return color || 'bg-gray-300'; // 默认灰色背景
-    }
-    return 'bg-gray-300'; // 默认灰色背景
-  };
-
   return (
     <div>
-      <div className="grid grid-cols-9 gap-4">
+      <div className={`grid grid-cols-${pokemonPerRow} gap-4`}>
         {pokemonList.map((pokemon) => (
           <div
             key={pokemon.id}
-            className={`flex flex-col items-center ${getPokemonBackgroundColor(pokemon.types[0].type.name)} rounded-lg shadow-md pd-4`}
+            className={`flex flex-col items-center ${getPokemonBackgroundColor(pokemon.types[0].type.name)} rounded-lg shadow-md p-4`}
           >
             <Link to={`/pokemon/${pokemon.id}`} className="flex flex-col items-center">
-              <img src={pokemon.sprites.front_default} alt={pokemon.name} className="w-22 h-22" />
+              <img src={pokemon.sprites.front_default} alt={pokemon.name} width={96} height={96}  />
               <p className="mb-3">{pokemon.name}</p>
             </Link>
           </div>
