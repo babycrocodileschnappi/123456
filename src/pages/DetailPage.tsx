@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { fetchPokemonById } from '../components/api';
-import '../tailwind.css';
-import { getPokemonBackgroundColor } from '../components/pokemonUtils';
+import { fetchPokemonById } from '../apis/api';
+import { getPokemonBackgroundColor } from '../pokemonUtils';
 
 const DetailPage: React.FC = () => {
     const { id } = useParams<{ id?: string }>();
@@ -18,7 +17,7 @@ const DetailPage: React.FC = () => {
     }, [id]);
 
     return (
-        <div className={`flex flex-col items-center pd-4`}>
+        <div className="flex flex-col items-center pd-4">
             <PokemonDetails pokemon={pokemon} />
             <Link to="/" className="text-blue-500 hover:underline">Back to HomePage</Link>
         </div>
