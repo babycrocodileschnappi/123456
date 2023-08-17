@@ -31,6 +31,7 @@ const PokemonGridItem: React.FC<PokemonGridItemProps> = ({ pokemonId }) => {
   return (
     <div
       className={`flex flex-col items-center ${isLoading ? 'bg-gray-300' : getPokemonBackgroundColor(pokemon?.types[0].type.name)} rounded-lg shadow-md p-4`}
+      style={{ height: '164px' }}
     >
       {isLoading ? (
         <p>Loading...</p>
