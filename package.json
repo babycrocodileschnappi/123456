@@ -1,6 +1,6 @@
 {
   "name": "pokedex-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "homepage": "./",
   "dependencies": {
@@ -76,11 +76,9 @@
   },
   "lint-staged": {
     "src/**/*.+(scss|css)": [
-      "prettier --write",
       "git add -n"
     ],
     "src/**/*.+(js|ts|tsx|)": [
-      "prettier --write",
       "eslint --fix",
       "git add -n"
     ]
