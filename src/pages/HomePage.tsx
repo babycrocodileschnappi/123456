@@ -1,6 +1,6 @@
-import React , { useState } from 'react';
-import PokemonGrid from '../PokemonGrid';
-import Pagination from '../components/Pagination';
+import React, { useState } from 'react';
+import PokemonGrid from '../PokemonGrid.tsx';
+import Pagination from '../components/Pagination.tsx';
 
 const HomePage: React.FC = () => {
   const itemsPerPage = 45;
@@ -11,11 +11,14 @@ const HomePage: React.FC = () => {
     setCurrentPage(page);
   };
 
-
   return (
     <div className="p-4 bg-gradient-to-r from-green-200 to-yellow-100">
       <PokemonGrid currentPage={currentPage} itemsPerPage={itemsPerPage} />
-      <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };

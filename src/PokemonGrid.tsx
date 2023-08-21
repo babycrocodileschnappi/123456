@@ -3,8 +3,8 @@
 // 每个pokemon格子单独请求
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchPokemonById } from './apis/api';
-import { getPokemonBackgroundColor } from './pokemonUtils';
+import { fetchPokemonById } from './apis/api.ts';
+import { getPokemonBackgroundColor } from './pokemonUtils.ts';
 
 interface PokemonGridItemProps {
   pokemonId: number;
@@ -30,14 +30,26 @@ const PokemonGridItem: React.FC<PokemonGridItemProps> = ({ pokemonId }) => {
 
   return (
     <div
-      className={`flex flex-col items-center ${isLoading ? 'bg-gray-300' : getPokemonBackgroundColor(pokemon?.types[0].type.name)} rounded-lg shadow-md p-4`}
+      className={`flex flex-col items-center ${
+        isLoading
+          ? 'bg-gray-300'
+          : getPokemonBackgroundColor(pokemon?.types[0].type.name)
+      } rounded-lg shadow-md p-4`}
       style={{ height: '164px' }}
     >
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <Link to={`/pokemon/${pokemon?.id}`} className="flex flex-col items-center">
-          <img src={pokemon?.sprites.front_default} alt={pokemon?.name} width={96} height={96} />
+        <Link
+          to={`/pokemon/${pokemon?.id}`}
+          className="flex flex-col items-center"
+        >
+          <img
+            src={pokemon?.sprites.front_default}
+            alt={pokemon?.name}
+            width={96}
+            height={96}
+          />
           <p className="mb-3">{pokemon?.name}</p>
         </Link>
       )}
@@ -50,7 +62,10 @@ interface PokemonGridProps {
   itemsPerPage: number;
 }
 
-const PokemonGrid: React.FC<PokemonGridProps> = ({ currentPage, itemsPerPage }) => {
+const PokemonGrid: React.FC<PokemonGridProps> = ({
+  currentPage,
+  itemsPerPage
+}) => {
   const minPokemonPerRow = 3;
   const maxPokemonPerRow = 9;
   const [pokemonPerRow, setPokemonPerRow] = useState(maxPokemonPerRow);
@@ -58,8 +73,11 @@ const PokemonGrid: React.FC<PokemonGridProps> = ({ currentPage, itemsPerPage }) 
   useEffect(() => {
     const handleResize = () => {
       const windowWidth = window.innerWidth;
-      const availableColumns = Math.floor(windowWidth / 150); // Adjust the value based on your design
-      const adjustedColumns = Math.max(minPokemonPerRow, Math.min(maxPokemonPerRow, availableColumns));
+      const availableColumns = Math.floor(windowWidth / 150);
+      const adjustedColumns = Math.max(
+        minPokemonPerRow,
+        Math.min(maxPokemonPerRow, availableColumns)
+      );
       setPokemonPerRow(adjustedColumns);
     };
 
@@ -75,7 +93,7 @@ const PokemonGrid: React.FC<PokemonGridProps> = ({ currentPage, itemsPerPage }) 
   const endIndex = startIndex + itemsPerPage - 1;
   const pokemonIds = [];
 
-  for (let i = startIndex; i <= endIndex && i <= 898; i++) {
+  for (let i = startIndex; i <= endIndex && i <= 898; i += 1) {
     pokemonIds.push(i);
   }
 

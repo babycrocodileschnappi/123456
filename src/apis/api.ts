@@ -34,24 +34,18 @@ interface Pokemon {
 
 // 创建 Axios 实例
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: BASE_URL
 });
 
 // 请求拦截器
 api.interceptors.request.use(
-  (config) => {
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (config) => (config),
+  (error) => (Promise.reject(error))
 );
 
 // 响应拦截器
 api.interceptors.response.use(
-  (response: AxiosResponse<Pokemon>) => {
-    return response;
-  },
+  (response: AxiosResponse<Pokemon>) => (response),
   (error: AxiosError) => {
     if (axios.isCancel(error)) {
       console.log('Request canceled:', error.message);
@@ -69,10 +63,9 @@ export const fetchPokemonById = async (id: number): Promise<Pokemon> => {
     const response = await api.get<Pokemon>(url);
     return response.data;
   } catch (error) {
+    console.log('fetchPokemonById error');
     throw error;
   }
 };
 
 export default api;
-
-
