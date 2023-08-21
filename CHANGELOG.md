@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/babycrocodileschnappi/123456/compare/v2.0.0-test...v2.0.0) (2023-08-21)
+
 ## [2.0.0-test](https://github.com/babycrocodileschnappi/123456/compare/v2.0.0...v2.0.0-test) (2023-08-21)
 
 ## [2.0.0](https://github.com/babycrocodileschnappi/123456/compare/v0.2.0...v2.0.0) (2023-08-21)
