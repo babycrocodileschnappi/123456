@@ -30,7 +30,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint --fix \"./src/**/*.{ts,tsx}\"",
     "prepare": "husky install",
-    "changelog": "conventional-changelog -p cz-config.js -i CHANGELOG.md -s -r 0"
+    "release": "release.sh",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && npm run changeissueurl",
+    "changeissueurl": "replace 'https://github.com/myproject/issues/' 'https://redmine.example.com/' CHANGELOG.md"
   },
   "browserslist": {
     "production": [
