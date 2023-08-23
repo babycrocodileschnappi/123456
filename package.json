@@ -4,35 +4,23 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.40",
-    "@types/react": "^18.2.20",
-    "@types/react-dom": "^18.2.7",
-    "autoprefixer": "^10.4.15",
     "axios": "^1.4.0",
-    "postcss": "^8.4.28",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.14.2",
-    "react-scripts": "5.0.1",
-    "react-virtualized": "^9.22.5",
-    "typescript": "^4.9.5",
-    "uuid": "^9.0.0",
-    "web-vitals": "^2.1.4"
+    "react-router-dom": "^6.14.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix \"./src/**/*.{ts,tsx}\"",
+    "lint": "eslint \"./src/**/*.{ts,tsx}\"",
     "prepare": "husky install",
     "release": "release.sh",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && npm run changeissueurl",
-    "changeissueurl": "replace 'https://github.com/myproject/issues/' 'https://redmine.example.com/' CHANGELOG.md"
+    "changeissueurl": "replace 'https://github.com/myproject/issues/' 'https://redmine.example.com/' CHANGELOG.md",
+    "commit": "cz",
+    "precommit": "lint-staged"
   },
   "browserslist": {
     "production": [
@@ -51,23 +39,26 @@
     "@babel/eslint-parser": "^7.22.10",
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
-    "@types/react-virtualized": "^9.21.22",
-    "@types/uuid": "^9.0.2",
-    "babel-eslint": "^10.1.0",
+    "@types/node": "^16.18.40",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
     "commitizen": "^4.3.0",
     "commitlint": "^17.7.1",
     "conventional-changelog": "^4.0.0",
     "conventional-changelog-cli": "^3.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.47.0",
-    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "husky": "^8.0.0",
     "lint-staged": "^14.0.0",
-    "parcel-bundler": "^1.12.5",
+    "react-scripts": "5.0.1",
     "tailwindcss": "^3.3.3",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4",
     "webpack-merge": "^5.9.0"
   },
   "husky": {
@@ -77,11 +68,9 @@
     }
   },
   "lint-staged": {
-    "src/**/*.+(scss|css)": [
-      "git add -n"
-    ],
-    "src/**/*.+(js|ts|tsx|)": [
-      "eslint --fix",
+    "src/**/*.+(js|ts|tsx|jsx)": [
+      "prettier --write",
+      "eslint",
       "git add -n"
     ]
   },

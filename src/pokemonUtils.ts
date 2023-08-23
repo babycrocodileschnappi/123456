@@ -17,12 +17,12 @@ export const typeColors: { [key: string]: string } = {
   steel: 'bg-gray-300',
   ice: 'bg-blue-100',
   dark: 'bg-indigo-500'
-};
+}
 
 export const getPokemonBackgroundColor = (type: string) => {
   if (type && type.length > 0) {
-    const color = typeColors[type];
-    return color || 'bg-gray-300'; // 默认灰色背景
+    const color = typeColors[type]
+    return color || 'bg-gray-300' // 默认灰色背景
   }
-  return 'bg-gray-300'; // 默认灰色背景
-};
+  return 'bg-gray-300' // 默认灰色背景
+}

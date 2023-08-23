@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import PokemonGrid from '../PokemonGrid.tsx';
-import Pagination from '../components/Pagination.tsx';
+import React, { useState } from 'react'
+import PokemonGrid from '../PokemonGrid'
+import Pagination from '../components/Pagination'
 
-const HomePage: React.FC = () => {
-  const itemsPerPage = 45;
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(898 / itemsPerPage);
+const HomePage: React.FC = function HomePage() {
+  const itemsPerPage = 45
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = Math.ceil(898 / itemsPerPage)
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+    setCurrentPage(page)
+  }
 
   return (
     <div className="p-4 bg-gradient-to-r from-green-200 to-yellow-100">
@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
         onPageChange={handlePageChange}
       />
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage
