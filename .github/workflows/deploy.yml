@@ -24,12 +24,20 @@ jobs:
       - name: Build React App
         run: npm run build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3 # 使用部署到 GitHub pages 的 action
-        with:
-          publish_dir: ./build # 部署打包后的 dist 目录
-          github_token: ${{ secrets.DEPLOY_SECRET }} # secret 名
-          user_name: babycrocodileschnappi
-          user_email: 3086764005@qq.com
-          commit_message: 自动部署 # 部署时的 git 提交信息，自由填写
+      - name: Init new repo in dist folder and commit generated files
+      run: |
+        cd build
+        git init
+        git add -A
+        git config --local 3086764005@qq.com "action@github.com"
+        git config --local babycrocodileschnappi "GitHub Action"
+        git commit -m 'deploy'
+
+    - name: Force push to destination branch
+      uses: ad-m/github-push-action@v0.5.0
+      with:
+        github_token: ${{ secrets.DEPLOY_SECRET }}
+        branch: gh-pages
+        force: true
+        directory: ./build
 
