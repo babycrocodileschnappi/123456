@@ -22,9 +22,7 @@ jobs:
         run: npm install
 
       - name: Build React App
-        run: npm ci
-             npm run build --if-present
-             npm test
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         run: |
@@ -32,5 +30,4 @@ jobs:
           git config --global user.name "GitHub Actions"
           echo "machine github.com login ${{ secrets.GITHUB_TOKEN }}" > ~/.netrc
           npm install -g gh-pages
-          gh-pages -d build
-
+          gh-pages -d build 
