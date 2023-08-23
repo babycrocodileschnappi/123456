@@ -22,8 +22,9 @@ jobs:
         run: npm install
 
       - name: Build React App
-      - run: npm run build --if-present
-      - run: npm test
+        run: npm ci
+             npm run build --if-present
+             npm test
 
       - name: Deploy to GitHub Pages
         run: |
