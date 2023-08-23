@@ -9,7 +9,7 @@ module.exports = {
     sourceType: 'module',
     project: "tsconfig.json"
   },
-  plugins: ['@typescript-eslint', 'react'],
+  plugins: ['@typescript-eslint', 'react', 'prettier'],
   rules: {
     'no-console': 'off',
   }
