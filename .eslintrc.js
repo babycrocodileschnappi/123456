@@ -12,5 +12,7 @@ module.exports = {
   plugins: ['@typescript-eslint', 'react', 'prettier'],
   rules: {
     'no-console': 'off',
+    'import/extensions': 'error',
+    'import/no-extraneous-dependencies': 'error'
   }
 };
