@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PokemonGrid from '../PokemonGrid'
 import Pagination from '../components/Pagination'
+import { Box } from '@chakra-ui/react'
 
 const HomePage: React.FC = function HomePage() {
   const itemsPerPage = 45
@@ -12,14 +13,14 @@ const HomePage: React.FC = function HomePage() {
   }
 
   return (
-    <div className="p-4 bg-gradient-to-r from-green-200 to-yellow-100">
+    <Box p={4} bgGradient="linear(to-r, green.200, yellow.100)">
       <PokemonGrid currentPage={currentPage} itemsPerPage={itemsPerPage} />
       <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
-    </div>
+    </Box>
   )
 }
 

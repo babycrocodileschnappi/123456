@@ -2,9 +2,10 @@
 // 之前为每个宝可梦发起了一个独立的API请求，这可能导致请求频繁，从而降低加载性能，修改后使用一个批量请求来获取多个宝可梦的数据，从而减少网络请求次数
 // 每个pokemon格子单独请求
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { fetchPokemonById } from './apis/api'
 import { getPokemonBackgroundColor } from './pokemonUtils'
+import { Box, Link, Image, Text, Grid, GridItem } from '@chakra-ui/react'
 
 interface PokemonGridItemProps {
   pokemonId: number
@@ -30,31 +31,40 @@ const PokemonGridItem: React.FC<PokemonGridItemProps> =
     }, [pokemonId])
 
     return (
-      <div
-        className={`flex flex-col items-center ${
+      <Box
+        p="4"
+        rounded="lg"
+        shadow="md"
+        bg={
           isLoading
-            ? 'bg-gray-300'
+            ? 'gray.300'
             : getPokemonBackgroundColor(pokemon?.types[0].type.name)
-        } rounded-lg shadow-md p-4`}
-        style={{ height: '164px' }}
+        }
+        h="164px"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
       >
         {isLoading ? (
-          <p>Loading...</p>
+          <Text>Loading...</Text>
         ) : (
           <Link
+            as={RouterLink}
             to={`/pokemon/${pokemon?.id}`}
-            className="flex flex-col items-center"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
           >
-            <img
+            <Image
               src={pokemon?.sprites.front_default}
               alt={pokemon?.name}
-              width={96}
-              height={96}
+              w="96px"
+              h="96px"
             />
-            <p className="mb-3">{pokemon?.name}</p>
+            <Text mb="3">{pokemon?.name}</Text>
           </Link>
         )}
-      </div>
+      </Box>
     )
   }
 
@@ -99,11 +109,13 @@ const PokemonGrid: React.FC<PokemonGridProps> = function PokemonGrid({
   }
 
   return (
-    <div className={`grid grid-cols-${pokemonPerRow} gap-4`}>
+    <Grid templateColumns={`repeat(${pokemonPerRow}, 1fr)`} gap={4}>
       {pokemonIds.map((pokemonId) => (
-        <PokemonGridItem key={pokemonId} pokemonId={pokemonId} />
+        <GridItem key={pokemonId}>
+          <PokemonGridItem pokemonId={pokemonId} />
+        </GridItem>
       ))}
-    </div>
+    </Grid>
   )
 }
 
