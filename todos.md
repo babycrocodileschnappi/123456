@@ -12,6 +12,9 @@
 12. 使用shell脚本发布应用；
 13. 【拓展】使用github-action实现提交代码自动打包和部署；
 
+- commitlint doesn't work;
+- chakra-ui vs antd
+
 下阶段 docker部署
 14. docker & nginx
 下阶段 后台服务开发
