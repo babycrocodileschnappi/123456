@@ -1,6 +1,5 @@
 // 增加了错误处理和取消请求的方法，whereas没用到
 // fetchPokemonByIds使用一个批量请求来获取多个宝可梦的数据，从而减少网络请求次数
-
 // 加个拦截器统一处理所有异常
 import axios, { AxiosResponse, AxiosError } from 'axios'
 

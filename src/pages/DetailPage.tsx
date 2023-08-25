@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { fetchPokemonById } from '../apis/api'
 import { getPokemonBackgroundColor } from '../pokemonUtils'
 import { Box, Text, UnorderedList, ListItem, Flex } from '@chakra-ui/react'
-
-//const pokemonInfoBox = 'rounded-xl shadow-lg p-2 my-2 px-4'
 
 const PokemonAbility: React.FC<{ abilities: any[] }> = function PokemonAbility({
   abilities
@@ -68,6 +66,7 @@ const PokemonDetails: React.FC<{ pokemon: any }> = function PokemonDetails({
     return null
   }
   const {
+    id,
     types,
     sprites,
     name,
@@ -78,6 +77,9 @@ const PokemonDetails: React.FC<{ pokemon: any }> = function PokemonDetails({
     moves,
     stats
   } = pokemon
+
+  const backpage = Math.floor((id - 1) / 45) + 1
+  const backpageString = backpage.toString()
 
   return (
     <Flex
@@ -95,7 +97,7 @@ const PokemonDetails: React.FC<{ pokemon: any }> = function PokemonDetails({
           height={475}
           className="mb-2"
         />
-        <Text fontSize="2xl" fontWeight="bold" m={4}>
+        <Text fontSize="2xl" fontWeight="bold" m={4} align="center">
           Name: {name}
         </Text>
       </Box>
@@ -134,6 +136,9 @@ const PokemonDetails: React.FC<{ pokemon: any }> = function PokemonDetails({
           <PokemonStat stats={stats} />
         </Box>
       </Flex>
+      <Link to={`/${backpageString}`} className="text-blue-500 hover:underline">
+        Back to HomePage
+      </Link>
     </Flex>
   )
 }

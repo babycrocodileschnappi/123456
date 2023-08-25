@@ -10,11 +10,12 @@ import DetailPage from '../pages/DetailPage'
 
 const AppRouter: React.FC = function AppRouter() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/:page" element={<HomePage />} />
         <Route path="/pokemon/:id" element={<DetailPage />} />
         <Route path="*" element={<Navigate to="/" />} />
+        <Route path="" element={<Navigate to="/1" />} />
       </Routes>
     </Router>
   )

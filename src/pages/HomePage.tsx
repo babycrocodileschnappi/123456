@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PokemonGrid from '../PokemonGrid'
 import Pagination from '../components/Pagination'
 import { Box } from '@chakra-ui/react'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const HomePage: React.FC = function HomePage() {
   const itemsPerPage = 45
-  const [currentPage, setCurrentPage] = useState(1)
+  const navigate = useNavigate()
+  const { page } = useParams<{ page?: string }>() // 获取动态参数 page
+  const currentPage = page ? parseInt(page) : 1 // 转换为数字
   const totalPages = Math.ceil(898 / itemsPerPage)
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
+  const handlePageChange = (newPage: number) => {
+    const newPath = `/${newPage}` // 生成新的路由路径
+    navigate(newPath) // 导航到新的路径
   }
 
   return (
