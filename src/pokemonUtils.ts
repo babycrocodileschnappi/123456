@@ -22,7 +22,7 @@ export const typeColors: { [key: string]: string } = {
 export const getPokemonBackgroundColor = (type: string) => {
   if (type && type.length > 0) {
     const color = typeColors[type]
-    return color || 'bg-gray-300' // 默认灰色背景
+    return color || 'gray.300' // 默认灰色背景
   }
-  return 'bg-gray-300' // 默认灰色背景
+  return 'gray.300' // 默认灰色背景
 }

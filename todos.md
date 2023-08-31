@@ -17,4 +17,14 @@
 
 下阶段 docker部署
 14. docker & nginx
+- 安装docker desktop： 
+    https://docs.docker.com/desktop/install/windows-install/
+    需要重启，运行 wsl --update 指令安装适用于 Linux 的 Windows 子系统
+    运行 docker run hello-world 指令验证成功安装
+    配置阿里云镜像：https://zhuanlan.zhihu.com/p/441965046
+- 新建Dockerfile文件
 下阶段 后台服务开发
+
+create-react-app
+
+vite

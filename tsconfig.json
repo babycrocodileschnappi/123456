@@ -19,7 +19,8 @@
   },
   "include": [
     "src",
-    ".eslintrc.js"
-]
+    ".eslintrc.js",
+    "commitlint.config.js"
+  ]
 }
 
